@@ -18,26 +18,34 @@ ARG PORT=8884
 # Prerequisites 
 RUN apk update && apk upgrade &&\ 
   adduser -D dev &&\
-  chown dev:dev /srv
+  chown -R dev:dev /home/dev
 
 # Environment 
-WORKDIR /srv
+WORKDIR /home/dev
 USER dev
+
+# Another RUN :p
+RUN mkdir /home/dev/apps
 
 # COPY to send a file to a dest
 # ADD works too  
-COPY package.json /srv
-ADD package.json /srv
+COPY package.json /home/dev/apps
+ADD package.json /home/dev/apps
 
 # Network resources
 EXPOSE ${PORT}
 
 # Again a RUN. You can
-RUN 
+RUN echo "toto" >> yourfile
 
-# Entrypoint cmds
-ENTRYPOINT /bin/sh
+# With the ENTRYPOINT and CMD below we will :
+# /bin/cat the file /home/gaby/DevOps/entrypoint.sh
+
+# Entrypoint cmds : cmd launch with the /bin/sh -c from docker behaviour
+ENTRYPOINT /bin/cat
+
+# CMD is the arg passed to docker run -ti ubuntu $CMD
 CMD /home/gaby/DevOps/entrypoint.sh
 
-# Or something like that
+# You could too only use CMD like that
 CMD [ "npm", "start" ]
