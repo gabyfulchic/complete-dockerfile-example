@@ -1,29 +1,32 @@
-# mydefault-dockerfile
-This project is here to store my sample of a Dockerfile. I pref using a sample like this i'll never forget anything.  
- 
-## How to use a Dockerfile after the dev part.
-```ruby
-
->>> Always name your dockerfile => Dockerfile
-> cd /folder/to/your/dockerfile
-> docker build . -t your-name:version
-
->>> And now you can see your image doing :
-> docker images | grep your-name
-```  
+# An example of complete dockerfile 
   
-## How to test it ? You will not run your image without checking if it works.
-```ruby
-
->>> That docker cmd will launch your container copying a file, and giving you a   
->>> a shell into it. If you CTRL + D in the container, the container will be  
->>> deleted in the docker ps -a.
-> docker run -it --rm -v /file/you/want/to/copy:/tmp/yourfile your-name:version sh 
-
->>> Surely, according to your app running on your containers you will need to use
->>> adaptive tools to make some CI/CD and be sure that the container will do 
->>> what he has to do. 
-> example: using gitlab-ci runner, you could make the runner execute a .py  
-> scripting using some curl cmds to test your web app and his scenarios  
-> by using POST curls cmd. 
+This project is here to store my sample of a Dockerfile.  
+I pref using a sample to never forget anything and to curl  
+the file everytime I need to begin a Dockerfile.  
+  
+## Use your Dockerfile
+  
+* Build your image
+```bash
+cd /folder/to/your/dockerfile
+docker build . -t foo:v0.0.1
+```  
+* You can check it here
+```bash
+docker images | grep foo
+```  
+* Run a container using your image
+```bash
+docker run -it --rm -v /file/you/want/to/copy:/tmp/yourfile foo:v0.0.1 sh
 ```
+  
+## Integrate Dockerfile to your production projects
+  
+You will maybe host the Dockerfile on your git repository to be close to your app,  
+and you will need to pass tests when you push a new release of your Dockerfile.  
+You will avoid human errors & therefore make your production cycle more faster.   
+  
+You could use gitlab-ci (or Jenkins, circle-ci, travis-ci ...), to make a runner  
+build your image, send it to a personal repository (Harbor, Nexus ...) and then try  
+to run a docker container. Then your runner will trigger a script testing for example  
+with HTTP request your flask app.    
