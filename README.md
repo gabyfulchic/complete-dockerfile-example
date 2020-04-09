@@ -1,11 +1,12 @@
 # An example of complete dockerfile  
 ![Docker release](https://img.shields.io/badge/Docker-19.03.6-9cf)  
   
-This project is here to store my sample of a Dockerfile.  
+This project is here to store my default complete Dockerfile.  
 I pref using a sample to never forget anything and to curl  
 the file everytime I need to begin a Dockerfile.  
+There is also [here](Dockerfile-flask-example) a Dockerfile already ok to deploy flask apps.  
   
-## Use your Dockerfile
+## Use Dockerfile 
   
 * Get the example
 ```bash
@@ -49,8 +50,8 @@ It will be hard for the first hour, but efficient for the rest of your career ðŸ
 alias d="docker"
 alias dps="docker ps"
 alias dpsa="docker ps -a"
-alias dlg="docker log"
-alias dlgf="docker log -f"
+alias dlg="docker logs"
+alias dlgf="docker logs -f"
 alias drun="docker run"
 alias dstp="docker stop"
 alias dstr="docker start"
